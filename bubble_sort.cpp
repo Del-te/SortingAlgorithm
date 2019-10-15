@@ -15,6 +15,8 @@ int main()
 {
     int a[9] = {3, 4, 2, 1, -1, 8, 9, 5, 7};
     bubble_sort(a, 9);
+    for (int i = 0; i < 9; i++)
+        cout << a[i] << " ";
     system("pause");
     return 0;
 }

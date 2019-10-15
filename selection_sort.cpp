@@ -21,6 +21,8 @@ int main()
 {
     int a[9] = {1, -1, 3, 5, 7, 8, 4, 6, 2};
     selection_sort(a, 9);
+    for (int i = 0; i < 9; i++)
+        cout << a[i] << " ";
     system("pause");
     return 0;
 }
