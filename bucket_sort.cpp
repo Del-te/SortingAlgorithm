@@ -16,7 +16,6 @@ void bucket_sort(int *a, int len)
     // 计算桶的个数
     int n = (max_item - min_item) / 10 + 1;
     // 为了方便，用二维向量做桶
-    // ！！！vector没有 vector<int> t[n] 这种语法
     vector<vector<int>> bucket(n);
     // 把东西丢进对应的桶中
     for (int i = 0; i < len; i++)
@@ -36,7 +35,7 @@ void bucket_sort(int *a, int len)
 
 int main()
 {
-    int a[9] = {10, 11, 60, 20, 80, 93, 91, 71, 41};
+    int a[9] = {10, -11, 60, 20, 80, -93, 91, 71, 41};
     bucket_sort(a, 9);
     for (int i = 0; i < 9; i++)
         cout << a[i] << " ";
