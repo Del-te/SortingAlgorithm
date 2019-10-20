@@ -15,22 +15,23 @@ void bucket_sort(int *a, int len)
     }
     // 计算桶的个数
     int n = (max_item - min_item) / 10 + 1;
-    vector<vector<int> > bucket(n);
+    // 为了方便，用二维向量做桶
+    // ！！！vector没有 vector<int> t[n] 这种语法
+    vector<vector<int>> bucket(n);
+    // 把东西丢进对应的桶中
     for (int i = 0; i < len; i++)
         bucket[(a[i] - min_item) / 10].push_back(a[i]);
+    // 桶内排序，可使用任意排序算法
     for (int i = 0; i < n; i++)
-        // 桶内排序，使用任意算法
         sort(bucket[i].begin(), bucket[i].end());
+    // 把桶中元素按顺序取出，拷贝回待排序数组
     int cnt = 0;
     for (int i = 0; i < n; i++)
-    // 存疑
-        // 因为i = 0时bucket[i]可能不满足条件，所以不能放在for循环里
-        if (bucket[i].size() > 0)
-            for (int j = 0; bucket[i].size() > 0; j++)
-            {
-                a[cnt++] = *bucket[i].begin();
-                bucket[i].erase(bucket[i].begin());
-            }
+        for (int j = 0; bucket[i].size() > 0; j++)
+        {
+            a[cnt++] = *bucket[i].begin();
+            bucket[i].erase(bucket[i].begin());
+        }
 }
 
 int main()
