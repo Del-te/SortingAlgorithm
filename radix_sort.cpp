@@ -1,21 +1,22 @@
 #include <iostream>
 #include <cmath>
 using namespace std;
-int maxbit(int* a, int len) //辅助函数，求数据的最大位数
+
+// 求数据的最大位数
+int maxbit(int* a, int len)
 {
-    int d = 1; //保存最大的位数
+    // 保存最大的位数
+    int d = 1; 
     int p = 10;
     for(int i = 0; i < len; ++i)
-    {
         while(abs(a[i]) >= p)
         {
             p *= 10;
             ++d;
         }
-    }
     return d;
 }
-void radix_sort(int* a, int len) //基数排序
+void radix_sort(int* a, int len)
 {
     int d = maxbit(a, len);
     // 用于收集的数组
