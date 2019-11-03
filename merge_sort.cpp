@@ -11,7 +11,7 @@ void merge(int *a, int l, int mid, int r)
             a[k] = t[j++];
         else if (j > r)
             a[k] = t[i++];
-        else if (a[i] < a[j])
+        else if (t[i] < t[j])
             a[k] = t[i++];
         else
             a[k] = t[j++];
