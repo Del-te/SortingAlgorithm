@@ -1,37 +1,45 @@
-#include <iostream>
+#include <cstdio>
+#include <algorithm>
 using namespace std;
-void merge(int *a, int l, int mid, int r)
+
+const int maxn = 100000 + 5;
+
+int a[maxn], t[maxn];
+
+void merge_sort(int l, int r)
 {
-    int t[r], i = l, j = mid + 1;
-    for (int k = l; k <= r; k++)
-        t[k] = a[k];
-    for (int k = l; k <= r; k++)
+    if (l >= r)  return;
+
+    int m = (l + r) / 2;
+
+    merge_sort(l, m);
+    merge_sort(m + 1, r);
+
+    int i = l, j = m + 1, p = 0;
+    while (i <= m && j <= r)
     {
-        if (i > mid)
-            a[k] = t[j++];
-        else if (j > r)
-            a[k] = t[i++];
-        else if (t[i] < t[j])
-            a[k] = t[i++];
+        if (a[i] < a[j])
+            t[p++] = a[i++];
         else
-            a[k] = t[j++];
+            t[p++] = a[j++];
     }
+
+    while (i <= m)  t[p++] = a[i++];
+    while (j <= r)  t[p++] = a[j++];
+    
+    p = 0;
+    for (int i = l; i <= r; i++)
+        a[i] = t[p++];
 }
-void merge_sort(int *a, int l, int r)
-{
-    if (r <= l)
-        return;
-    int mid = l + (r - l) / 2;
-    merge_sort(a, l, mid);
-    merge_sort(a, mid + 1, r);
-    merge(a, l, mid, r);
-}
+
 int main()
 {
-    int a[9] = {1, -1, 6, 2, 8, 9, 9, 7, 4};
-    merge_sort(a, 0, 8);
-    for (int i = 0; i < 9; i++)
-        cout << a[i] << " ";
-    system("pause");
+    int n;
+    scanf("%d", &n);
+    for (int i = 0; i < n; i++)
+        scanf("%d", &a[i]);
+    merge_sort(0, n - 1);
+    for (int i = 0; i < n; i++)
+        printf("%d ", a[i]);
     return 0;
 }
