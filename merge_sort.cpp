@@ -8,13 +8,13 @@ int a[maxn], t[maxn];
 
 void merge_sort(int l, int r)
 {
+    // 递归边界
     if (l >= r)  return;
-
+    // 分
     int m = (l + r) / 2;
-
     merge_sort(l, m);
     merge_sort(m + 1, r);
-
+    // 治
     int i = l, j = m + 1, p = 0;
     while (i <= m && j <= r)
     {
@@ -23,10 +23,9 @@ void merge_sort(int l, int r)
         else
             t[p++] = a[j++];
     }
-
     while (i <= m)  t[p++] = a[i++];
     while (j <= r)  t[p++] = a[j++];
-    
+    // 物归原主
     p = 0;
     for (int i = l; i <= r; i++)
         a[i] = t[p++];
